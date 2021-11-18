@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
 
-
+    
     public int moveSpeed;
     public int score;
+    public int health; // our health variable
 
 
     // Start is called before the first frame update
@@ -39,11 +40,18 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Coin")) 
+        if (collision.gameObject.CompareTag("Coin"))  // when we collect the coin
         {
             score++;
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.CompareTag("Hazard"))
+        {
+            health--;
+            Destroy(collision.gameObject);
+        }
+
     }
 
 }

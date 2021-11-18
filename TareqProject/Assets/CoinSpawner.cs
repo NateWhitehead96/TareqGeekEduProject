@@ -5,6 +5,7 @@ using UnityEngine;
 public class CoinSpawner : MonoBehaviour
 {
     public GameObject Coin; // the coin we're going to spawn
+    public GameObject Hazard;
     public int XBounds; // these will be our boundry for the game
     public int YBounds;
 
@@ -25,7 +26,20 @@ public class CoinSpawner : MonoBehaviour
             int randomX = Random.Range(-XBounds, XBounds + 1); // find a spot inside our x bounds
             int randomY = Random.Range(-YBounds, YBounds + 1); // find a spot inside our y bounds
 
-            Instantiate(Coin, new Vector3(transform.position.x + randomX, transform.position.y + randomY), Quaternion.identity); // we spawn the coin using a new vector3 for position and 0 rotation
+            int randomThingToSpawn = Random.Range(0, 2);
+
+            if(randomThingToSpawn == 0)
+            {
+                // lets spawn the coin
+                Instantiate(Coin, new Vector3(transform.position.x + randomX, transform.position.y + randomY), Quaternion.identity); // we spawn the coin using a new vector3 for position and 0 rotation
+            }
+            if(randomThingToSpawn == 1)
+            {
+                // spawn the hazard
+                Instantiate(Hazard, new Vector3(transform.position.x + randomX, transform.position.y + randomY), Quaternion.identity); // we spawn the coin using a new vector3 for position and 0 rotation
+            }
+
+            
 
             Timer = 0; // reset the timer
         }

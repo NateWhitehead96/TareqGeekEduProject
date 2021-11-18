@@ -7,6 +7,7 @@ public class ScoreTracker : MonoBehaviour
 {
 
     public Text ScoreText; // the text used for displaying score
+    public Text HealthText;
     public PlayerScript player; // a reference to our player so we can access score
 
     // Start is called before the first frame update
@@ -19,5 +20,6 @@ public class ScoreTracker : MonoBehaviour
     void Update()
     {
         ScoreText.text = "Score: " + player.score; // update the text to show our player score
+        HealthText.text = "Health: " + player.health; // update our health
     }
 }
