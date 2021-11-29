@@ -13,6 +13,8 @@ public class PlayerScript : MonoBehaviour
     public Vector2 movement;
     public Vector2 mousePosition;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,11 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKey(KeyCode.UpArrow))
         {
             transform.position = new Vector3(transform.position.x, transform.position.y + moveSpeed * Time.deltaTime);
+            animator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
