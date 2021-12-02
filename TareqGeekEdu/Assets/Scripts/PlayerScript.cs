@@ -13,7 +13,10 @@ public class PlayerScript : MonoBehaviour
     public Vector2 movement;
     public Vector2 mousePosition;
 
+    // animation stuff
     public Animator animator;
+    public bool walking;
+    public bool attacking;
 
     // Start is called before the first frame update
     void Start()
@@ -24,28 +27,59 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ------------ movement animation and input ------------------ //
         if (Input.GetKey(KeyCode.UpArrow))
         {
             transform.position = new Vector3(transform.position.x, transform.position.y + moveSpeed * Time.deltaTime);
-            animator.SetBool("IsWalking", true);
+            walking = true;
         }
-        else
+        if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            animator.SetBool("IsWalking", false);
+            walking = false;
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
             transform.position = new Vector3(transform.position.x, transform.position.y - moveSpeed * Time.deltaTime);
+            walking = true;
+        }
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            walking = false;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position = new Vector3(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
+            walking = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            walking = false;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position = new Vector3(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y);
+            walking = true;
+        }
+        if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            walking = false;
         }
 
+        animator.SetBool("IsWalking", walking);
+
+        // --------------- Attacking and attack animation -------------- //
+
+        if (Input.GetMouseButtonDown(0)) // left click
+        {
+            attacking = true;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            attacking = false;
+        }
+
+        animator.SetBool("isAttacking", attacking); // set our animation to the attacking bool
 
         //movement.x = Input.GetAxisRaw("Horizontal");
         //movement.y = Input.GetAxisRaw("Vertical");
