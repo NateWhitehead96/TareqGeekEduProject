@@ -18,6 +18,10 @@ public class PlayerScript : MonoBehaviour
     public bool walking;
     public bool attacking;
 
+    // For our attacking/interacting
+    public LayerMask InteractingMask; // the layer we want to interact with
+    public Transform AttackPosition; // our hand position
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +76,16 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) // left click
         {
             attacking = true;
+            Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(AttackPosition.position, 1, InteractingMask);
+            for (int i = 0; i < interactableObjects.Length; i++)
+            {
+                if (interactableObjects[i].gameObject.CompareTag("Tree"))
+                {
+                    print("Chopped a tree");
+                    interactableObjects[i].gameObject.GetComponent<TreeScript>().Health--;
+                    PlayerInventory.Logs++; // gainging so logs
+                }
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
