@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TreeScript : MonoBehaviour
+public class RockScript : MonoBehaviour
 {
+    [SerializeField]
     public int Health = 3;
+    [SerializeField]
     public Slider HitSlider; // the slider
+    [SerializeField]
     public GameObject HitCanavs; // this the canvas
-    public SpriteRenderer renderer;
-    public Sprite[] sprites; // this would hold the different health versions of this resource
 
     private void Start()
     {
@@ -25,7 +26,7 @@ public class TreeScript : MonoBehaviour
         {
             HitCanavs.SetActive(true);
         }
-        if(Health <= 0) // we might change this to just being inactive to reactive every day
+        if (Health <= 0) // we might change this to just being inactive to reactive every day
         {
             Destroy(gameObject);
         }

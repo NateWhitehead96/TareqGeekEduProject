@@ -85,6 +85,12 @@ public class PlayerScript : MonoBehaviour
                     interactableObjects[i].gameObject.GetComponent<TreeScript>().Health--;
                     PlayerInventory.Logs++; // gainging so logs
                 }
+                else if (interactableObjects[i].gameObject.CompareTag("Rock"))
+                {
+                    print("Mined a rock");
+                    interactableObjects[i].gameObject.GetComponent<RockScript>().Health--;
+                    PlayerInventory.Stones++; // gaining some stones/rocks
+                }
             }
         }
 
