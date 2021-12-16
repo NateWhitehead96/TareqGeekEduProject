@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CurrentTool
+{
+    NoTool,
+    Axe,
+    Pickaxe
+}
+
 public class PlayerScript : MonoBehaviour
 {
     // variables
@@ -22,10 +29,18 @@ public class PlayerScript : MonoBehaviour
     public LayerMask InteractingMask; // the layer we want to interact with
     public Transform AttackPosition; // our hand position
 
+    // Tool variables
+    public GameObject[] AllTools;
+    public CurrentTool tool;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i = 0; i < AllTools.Length; i++)
+        {
+            AllTools[i].SetActive(false); // to make sure our tools are inactive to start
+        }
+        tool = CurrentTool.NoTool;
     }
 
     // Update is called once per frame
@@ -79,13 +94,13 @@ public class PlayerScript : MonoBehaviour
             Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(AttackPosition.position, 1, InteractingMask);
             for (int i = 0; i < interactableObjects.Length; i++)
             {
-                if (interactableObjects[i].gameObject.CompareTag("Tree"))
+                if (interactableObjects[i].gameObject.CompareTag("Tree") && tool == CurrentTool.Axe)
                 {
                     print("Chopped a tree");
                     interactableObjects[i].gameObject.GetComponent<TreeScript>().Health--;
                     PlayerInventory.Logs++; // gainging so logs
                 }
-                else if (interactableObjects[i].gameObject.CompareTag("Rock"))
+                else if (interactableObjects[i].gameObject.CompareTag("Rock") && tool == CurrentTool.Pickaxe)
                 {
                     print("Mined a rock");
                     interactableObjects[i].gameObject.GetComponent<RockScript>().Health--;
@@ -110,5 +125,38 @@ public class PlayerScript : MonoBehaviour
         Vector2 lookDirection = mousePosition - rb2d.position;
         float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
         rb2d.rotation = angle;
+
+        SwitchTool();
+
+    }
+
+    void SwitchTool()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) // restarts us back to no tools and hide the other tools
+        {
+            for (int i = 0; i < AllTools.Length; i++)
+            {
+                AllTools[i].SetActive(false); 
+            }
+            tool = CurrentTool.NoTool;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) // show our axe
+        {
+            for (int i = 0; i < AllTools.Length; i++)
+            {
+                AllTools[i].SetActive(false); 
+            }
+            AllTools[0].SetActive(true);
+            tool = CurrentTool.Axe;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) // show our pickaxe
+        {
+            for (int i = 0; i < AllTools.Length; i++)
+            {
+                AllTools[i].SetActive(false); 
+            }
+            AllTools[1].SetActive(true);
+            tool = CurrentTool.Pickaxe;
+        }
     }
 }
