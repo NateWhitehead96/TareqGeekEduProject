@@ -33,9 +33,13 @@ public class PlayerScript : MonoBehaviour
     public GameObject[] AllTools;
     public CurrentTool tool;
 
+    // PauseControl
+    public GameObject PauseCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
+        PauseCanvas.SetActive(false);
         for (int i = 0; i < AllTools.Length; i++)
         {
             AllTools[i].SetActive(false); // to make sure our tools are inactive to start
@@ -46,6 +50,13 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Pause control
+        if (Input.GetKeyDown(KeyCode.KeypadEnter)) // the numberpad enter button
+        {
+            PauseCanvas.SetActive(true);
+            Time.timeScale = 0;
+        }
+
         // ------------ movement animation and input ------------------ //
         if (Input.GetKey(KeyCode.UpArrow))
         {
@@ -142,21 +153,32 @@ public class PlayerScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha2)) // show our axe
         {
-            for (int i = 0; i < AllTools.Length; i++)
-            {
-                AllTools[i].SetActive(false); 
-            }
-            AllTools[0].SetActive(true);
-            tool = CurrentTool.Axe;
+            EquipAxe();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3)) // show our pickaxe
         {
-            for (int i = 0; i < AllTools.Length; i++)
-            {
-                AllTools[i].SetActive(false); 
-            }
-            AllTools[1].SetActive(true);
-            tool = CurrentTool.Pickaxe;
+            EquipPickaxe();
         }
+    }
+
+    // Toolbox button functions
+    public void EquipAxe() // does the same of our switch tool to axe
+    {
+        for (int i = 0; i < AllTools.Length; i++)
+        {
+            AllTools[i].SetActive(false);
+        }
+        AllTools[0].SetActive(true);
+        tool = CurrentTool.Axe;
+    }
+
+    public void EquipPickaxe()
+    {
+        for (int i = 0; i < AllTools.Length; i++)
+        {
+            AllTools[i].SetActive(false);
+        }
+        AllTools[1].SetActive(true);
+        tool = CurrentTool.Pickaxe;
     }
 }
