@@ -6,7 +6,8 @@ public enum CurrentTool
 {
     NoTool,
     Axe,
-    Pickaxe
+    Pickaxe,
+    Sword
 }
 
 public class PlayerScript : MonoBehaviour
@@ -117,6 +118,11 @@ public class PlayerScript : MonoBehaviour
                     interactableObjects[i].gameObject.GetComponent<RockScript>().Health--;
                     PlayerInventory.Stones++; // gaining some stones/rocks
                 }
+                else if (interactableObjects[i].gameObject.CompareTag("Enemy") && tool == CurrentTool.Sword)
+                {
+                    print("Killing enemy");
+                    interactableObjects[i].gameObject.GetComponent<EnemyScript>().Health--;
+                }
             }
         }
 
@@ -159,6 +165,10 @@ public class PlayerScript : MonoBehaviour
         {
             EquipPickaxe();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            EquipSword();
+        }
     }
 
     // Toolbox button functions
@@ -180,5 +190,15 @@ public class PlayerScript : MonoBehaviour
         }
         AllTools[1].SetActive(true);
         tool = CurrentTool.Pickaxe;
+    }
+
+    public void EquipSword()
+    {
+        for (int i = 0; i < AllTools.Length; i++)
+        {
+            AllTools[i].SetActive(false);
+        }
+        AllTools[2].SetActive(true);
+        tool = CurrentTool.Sword;
     }
 }
