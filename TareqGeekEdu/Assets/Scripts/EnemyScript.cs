@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class EnemyScript : MonoBehaviour
     public float DistanceY; // how far the player is from the enemy on the y axis
 
     public int Health;
+    public Slider HealthBar;
+
+    public bool stunned;
     // Start is called before the first frame update
     void Start()
     {
-        
+        HealthBar.maxValue = Health;
     }
 
     // Update is called once per frame
@@ -22,7 +26,7 @@ public class EnemyScript : MonoBehaviour
         DistanceX = Mathf.Abs(transform.position.x - Player.position.x); // this now is the absolute distance
         DistanceY = Mathf.Abs(transform.position.y - Player.position.y);
 
-        if (DistanceX < 20 && DistanceY < 20)
+        if (DistanceX < 20 && DistanceY < 20 && stunned == false)
         {
             // we are close enough to the player to chase
             if(transform.position.x < Player.position.x) // enemy is to the left of the player
@@ -43,9 +47,23 @@ public class EnemyScript : MonoBehaviour
             }
         }
 
+        HealthBar.value = Health;
+
         if(Health <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    public void StunEnemy() // this function will help us stun and stop our enemy from moving
+    {
+        stunned = true;
+        StartCoroutine(StunTime()); // starts a new timed event to unstun the enemy
+    }
+
+    IEnumerator StunTime()
+    {
+        yield return new WaitForSeconds(0.5f); // wait 0.5 seconds
+        stunned = false;
     }
 }

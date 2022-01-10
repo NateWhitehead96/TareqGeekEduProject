@@ -121,6 +121,7 @@ public class PlayerScript : MonoBehaviour
                 else if (interactableObjects[i].gameObject.CompareTag("Enemy") && tool == CurrentTool.Sword)
                 {
                     print("Killing enemy");
+                    interactableObjects[i].gameObject.GetComponent<EnemyScript>().StunEnemy(); // stun the enemy
                     interactableObjects[i].gameObject.GetComponent<EnemyScript>().Health--;
                 }
             }
