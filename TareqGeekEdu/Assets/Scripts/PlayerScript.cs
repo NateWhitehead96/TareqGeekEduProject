@@ -37,6 +37,7 @@ public class PlayerScript : MonoBehaviour
     // PauseControl
     public GameObject PauseCanvas;
 
+    public int Health;
     // Start is called before the first frame update
     void Start()
     {

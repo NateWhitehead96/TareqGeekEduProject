@@ -14,6 +14,9 @@ public class EnemyScript : MonoBehaviour
     public Slider HealthBar;
 
     public bool stunned;
+
+    public LayerMask playerLayer;
+    public bool attacking;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,12 +50,32 @@ public class EnemyScript : MonoBehaviour
             }
         }
 
+        if(DistanceX < 2 && DistanceY < 2 && attacking == false) // within the attack range
+        {
+            StartCoroutine(AttackPlayer());
+        }
+
         HealthBar.value = Health;
 
         if(Health <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator AttackPlayer()
+    {
+        attacking = true;
+        Collider2D[] player = Physics2D.OverlapCircleAll(transform.position, 3, playerLayer); // find all objects on player layer
+        for (int i = 0; i < player.Length; i++)
+        {
+            if (player[i].gameObject.CompareTag("Player"))
+            {
+                player[i].gameObject.GetComponent<PlayerScript>().Health--;
+            }
+        }
+        yield return new WaitForSeconds(1);
+        attacking = false;
     }
 
     public void StunEnemy() // this function will help us stun and stop our enemy from moving
