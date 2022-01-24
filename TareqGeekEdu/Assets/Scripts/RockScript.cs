@@ -28,7 +28,7 @@ public class RockScript : MonoBehaviour
         }
         if (Health <= 0) // we might change this to just being inactive to reactive every day
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

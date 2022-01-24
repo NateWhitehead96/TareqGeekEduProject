@@ -8,7 +8,6 @@ public class TreeScript : MonoBehaviour
     public int Health = 3;
     public Slider HitSlider; // the slider
     public GameObject HitCanavs; // this the canvas
-    public SpriteRenderer renderer;
     public Sprite[] sprites; // this would hold the different health versions of this resource
 
     private void Start()
@@ -27,7 +26,7 @@ public class TreeScript : MonoBehaviour
         }
         if(Health <= 0) // we might change this to just being inactive to reactive every day
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

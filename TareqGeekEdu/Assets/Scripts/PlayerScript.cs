@@ -41,6 +41,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1; // make sure we're not paused
         PauseCanvas.SetActive(false);
         for (int i = 0; i < AllTools.Length; i++)
         {
