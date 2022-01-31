@@ -41,6 +41,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = new Vector3(0, 0, 0);
         Time.timeScale = 1; // make sure we're not paused
         PauseCanvas.SetActive(false);
         for (int i = 0; i < AllTools.Length; i++)
@@ -113,12 +114,14 @@ public class PlayerScript : MonoBehaviour
                     print("Chopped a tree");
                     interactableObjects[i].gameObject.GetComponent<TreeScript>().Health--;
                     PlayerInventory.Logs++; // gainging so logs
+                    FindObjectOfType<PlayerInventory>().wood.quantity = PlayerInventory.Logs; // this is very bad
                 }
                 else if (interactableObjects[i].gameObject.CompareTag("Rock") && tool == CurrentTool.Pickaxe)
                 {
                     print("Mined a rock");
                     interactableObjects[i].gameObject.GetComponent<RockScript>().Health--;
                     PlayerInventory.Stones++; // gaining some stones/rocks
+                    FindObjectOfType<PlayerInventory>().rock.quantity = PlayerInventory.Stones; // this is very bad
                 }
                 else if (interactableObjects[i].gameObject.CompareTag("Enemy") && tool == CurrentTool.Sword)
                 {

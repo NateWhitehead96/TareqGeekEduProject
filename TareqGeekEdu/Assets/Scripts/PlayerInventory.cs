@@ -17,24 +17,21 @@ public class PlayerInventory : MonoBehaviour
     {
         for (int i = 0; i < InventorySlots.Length; i++) // assign all of the slots to defualt
         {
-            InventorySlots[i].image.sprite = defaultItem.image;
-            InventorySlots[i].quantity.text = defaultItem.quantity.ToString();
+            InventorySlots[i].UpdateSlot(defaultItem);
         }
 
-        InventorySlots[0].image.sprite = wood.image; // assign the wood image to the first slot
-        InventorySlots[0].quantity.text = wood.quantity.ToString(); // assign the text of the item slot to our item
+        InventorySlots[0].UpdateSlot(wood); // updating the slot for wood
 
-        InventorySlots[1].image.sprite = rock.image;
-        InventorySlots[1].quantity.text = rock.quantity.ToString();
+        InventorySlots[1].UpdateSlot(rock);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        wood.quantity = Logs; // make sure our logs are updating
-        InventorySlots[0].quantity.text = wood.quantity.ToString();
-        rock.quantity = Stones; // make sure our stones are updating
-        InventorySlots[1].quantity.text = rock.quantity.ToString();
+        // constantly updating these 2 slots
+        InventorySlots[0].UpdateSlot(wood);
+
+        InventorySlots[1].UpdateSlot(rock);
     }
 }
