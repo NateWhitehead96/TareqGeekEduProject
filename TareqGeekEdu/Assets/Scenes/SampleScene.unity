@@ -872,6 +872,8 @@ MonoBehaviour:
   quantity: {fileID: 572277095}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &178183437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,6 +1095,8 @@ MonoBehaviour:
   quantity: {fileID: 950929568}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &207329238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1262,6 +1266,8 @@ MonoBehaviour:
   quantity: {fileID: 1706787189}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &215095686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1435,6 +1441,8 @@ MonoBehaviour:
   quantity: {fileID: 2026442557}
   currentItem: {fileID: 0}
   hasItem: 1
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &230420167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1529,6 +1537,8 @@ MonoBehaviour:
   quantity: {fileID: 1483689645}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &240731459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1858,6 +1868,8 @@ MonoBehaviour:
   quantity: {fileID: 606394543}
   currentItem: {fileID: 0}
   hasItem: 1
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &327585691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2075,6 +2087,97 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &396604798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 396604799}
+  - component: {fileID: 396604802}
+  - component: {fileID: 396604801}
+  - component: {fileID: 396604800}
+  m_Layer: 5
+  m_Name: CustomCursor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &396604799
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396604798}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 645044780}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 40, y: 40}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &396604800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396604798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2268c3cbff343484882eb8ffc21a512a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorImage: {fileID: 396604801}
+  inventory: {fileID: 668918380}
+  currentItem: {fileID: 0}
+--- !u!114 &396604801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396604798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &396604802
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396604798}
+  m_CullTransparentMesh: 1
 --- !u!1 &422755357
 GameObject:
   m_ObjectHideFlags: 0
@@ -3454,12 +3557,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -3504,6 +3607,7 @@ RectTransform:
   - {fileID: 134560795}
   - {fileID: 688564536}
   - {fileID: 639515796}
+  - {fileID: 396604799}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4331,6 +4435,8 @@ MonoBehaviour:
   quantity: {fileID: 611283867}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &805437662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4573,6 +4679,8 @@ MonoBehaviour:
   quantity: {fileID: 1275489402}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &854442638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4678,6 +4786,8 @@ MonoBehaviour:
   quantity: {fileID: 277357577}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &864197960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4971,6 +5081,8 @@ MonoBehaviour:
   quantity: {fileID: 1609819364}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &1089645328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5359,6 +5471,8 @@ MonoBehaviour:
   quantity: {fileID: 1475114633}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &1177510932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6316,6 +6430,8 @@ MonoBehaviour:
   quantity: {fileID: 1801662029}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &1399912059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7035,6 +7151,8 @@ MonoBehaviour:
   quantity: {fileID: 765186575}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &1569516220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8399,6 +8517,8 @@ MonoBehaviour:
   quantity: {fileID: 2098357425}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &1948246211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9116,6 +9236,8 @@ MonoBehaviour:
   quantity: {fileID: 1308285092}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &2072008190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9210,6 +9332,8 @@ MonoBehaviour:
   quantity: {fileID: 111600394}
   currentItem: {fileID: 0}
   hasItem: 0
+  customCursor: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &2081439822
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,9 +29,9 @@ public class PlayerInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // constantly updating these 2 slots
-        InventorySlots[0].UpdateSlot(wood);
-
-        InventorySlots[1].UpdateSlot(rock);
+        for (int i = 0; i < InventorySlots.Length; i++)
+        {
+            InventorySlots[i].UpdateSlot(InventorySlots[i].currentItem); // the inventory will constantly update itself
+        }
     }
 }
