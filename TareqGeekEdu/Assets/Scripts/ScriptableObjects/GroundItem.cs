@@ -23,7 +23,13 @@ public class GroundItem : MonoBehaviour
         {
             for (int i = 0; i < collision.gameObject.GetComponent<PlayerInventory>().InventorySlots.Length; i++)
             {
-                if(collision.gameObject.GetComponent<PlayerInventory>().InventorySlots[i].hasItem == false)
+                if(collision.gameObject.GetComponent<PlayerInventory>().InventorySlots[i].currentItem == itemType) // if the item on the ground is in our inventory, stack it
+                {
+                    itemType.quantity++; // add to the quantity or number of items
+                    Destroy(gameObject);
+                    return;
+                }
+                if(collision.gameObject.GetComponent<PlayerInventory>().InventorySlots[i].currentItem == collision.gameObject.GetComponent<PlayerInventory>().defaultItem)
                 {
                     collision.gameObject.GetComponent<PlayerInventory>().InventorySlots[i].UpdateSlot(itemType); // the item we're walking into now goes into hopefully the empty slot
                     collision.gameObject.GetComponent<PlayerInventory>().InventorySlots[i].hasItem = true;

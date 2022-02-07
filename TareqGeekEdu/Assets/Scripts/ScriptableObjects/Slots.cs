@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Slots : MonoBehaviour , IDragHandler, IDropHandler
+public class Slots : MonoBehaviour , IDragHandler, IDropHandler, IBeginDragHandler
 {
     public Image image; // the image of the inventory slot
     public Text quantity; // the amount of the items
@@ -32,20 +32,37 @@ public class Slots : MonoBehaviour , IDragHandler, IDropHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        customCursor.cursorImage.color = Color.white; // make the image visible
-        customCursor.cursorImage.sprite = image.sprite; // assign the slots image to our cursor
         customCursor.transform.position = Input.mousePosition; // the cursor moves with our mouse position
-        customCursor.currentItem = currentItem; // assign the item to our cursor
+        currentItem = inventory.defaultItem; // wipe the old slot to be the default item
     }
 
     public void OnDrop(PointerEventData eventData)
     {
         for (int i = 0; i < inventory.InventorySlots.Length; i++)
         {
-            if(RectTransformUtility.RectangleContainsScreenPoint(inventory.InventorySlots[i].GetComponent<RectTransform>(), Input.mousePosition))
+            if(RectTransformUtility.RectangleContainsScreenPoint(inventory.InventorySlots[i].GetComponent<RectTransform>(), Input.mousePosition) 
+                && inventory.InventorySlots[i].currentItem == inventory.defaultItem) // check that we're moving an item into the empty slot
             {
-                inventory.InventorySlots[i].currentItem = customCursor.currentItem;
+                inventory.InventorySlots[i].currentItem = customCursor.currentItem; // dropping the item on our cursor onto the slot
+                customCursor.cursorImage.color = Color.clear; // hiding cursor
+                print("Dropping Item on slot");
+            }
+            else if(RectTransformUtility.RectangleContainsScreenPoint(inventory.InventorySlots[i].GetComponent<RectTransform>(), Input.mousePosition)
+                && inventory.InventorySlots[i].currentItem != inventory.defaultItem) // this means the item we're dropping on isnt empty
+            {
+                customCursor.currentSlot.currentItem = inventory.InventorySlots[i].currentItem; // assigns the slot to be the item we're switching
+                inventory.InventorySlots[i].currentItem = customCursor.currentItem; // assigns the drop slot to be the item on cursor
+                customCursor.cursorImage.color = Color.clear; // hide cursor
             }
         }
+        customCursor.cursorImage.color = Color.clear; // hide cursor
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        customCursor.cursorImage.color = Color.white; // make the image visible
+        customCursor.cursorImage.sprite = image.sprite; // assign the slots image to our cursor
+        customCursor.currentSlot = GetComponent<Slots>(); // assign the slot to our cursor
+        customCursor.currentItem = currentItem; // assign the item to our cursor
     }
 }
