@@ -33,6 +33,8 @@ public class PlayerScript : MonoBehaviour
     // Tool variables
     public GameObject[] AllTools;
     public CurrentTool tool;
+    public GameObject SwordIcon; // the sword image on our tool belt
+    public bool ownSword; // a bool that tells us if we own the sword or not
 
     // PauseControl
     public GameObject PauseCanvas;
@@ -49,6 +51,7 @@ public class PlayerScript : MonoBehaviour
             AllTools[i].SetActive(false); // to make sure our tools are inactive to start
         }
         tool = CurrentTool.NoTool;
+        SwordIcon.SetActive(false); // start the game with the sword icon not active
     }
 
     // Update is called once per frame
@@ -171,7 +174,7 @@ public class PlayerScript : MonoBehaviour
         {
             EquipPickaxe();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha4) && ownSword == true) // if we own the sword we can equip it
         {
             EquipSword();
         }
