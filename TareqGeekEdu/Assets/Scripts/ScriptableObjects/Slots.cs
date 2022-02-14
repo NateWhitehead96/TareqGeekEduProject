@@ -21,9 +21,10 @@ public class Slots : MonoBehaviour , IDragHandler, IDropHandler, IBeginDragHandl
         customCursor.cursorImage.color = Color.clear; // hide the cursor when we play
     }
 
-    public void UpdateSlot(Item item)
+    public void UpdateSlot(Item item, int amount)
     {
         currentItem = item; // make the item coming into the slot the new current item
+        currentItem.quantity = amount;
         image.sprite = currentItem.image; // set the image
         quantity.text = currentItem.quantity.ToString(); // update the text
         

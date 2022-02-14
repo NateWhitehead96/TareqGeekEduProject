@@ -17,6 +17,8 @@ public class EnemyScript : MonoBehaviour
 
     public LayerMask playerLayer;
     public bool attacking;
+
+    public GameObject Gem; // the prefab gem we're going to drop when enemy dies
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +61,7 @@ public class EnemyScript : MonoBehaviour
 
         if(Health <= 0)
         {
+            Instantiate(Gem, transform.position, transform.rotation); // spawn gem
             Destroy(gameObject);
         }
     }
