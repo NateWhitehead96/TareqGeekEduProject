@@ -34,8 +34,13 @@ public class PlayerScript : MonoBehaviour
     public GameObject[] AllTools;
     public CurrentTool tool;
     public GameObject SwordIcon; // the sword image on our tool belt
+    // gameobject of the sword itself
     public bool ownSword; // a bool that tells us if we own the sword or not
-
+    public int swordLevel; // upgrade levels for each tool
+    public int axeLevel;
+    public int pickaxeLevel;
+    public GameObject Swordig;
+    public Sprite GemSword;
     // PauseControl
     public GameObject PauseCanvas;
 

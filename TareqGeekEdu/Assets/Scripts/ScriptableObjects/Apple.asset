@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2aa658acdd883a943be63a940d9ec743, type: 3}
-  quantity: 0
+  quantity: 8

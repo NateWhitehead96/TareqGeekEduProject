@@ -35,11 +35,12 @@ public class GroundItem : MonoBehaviour
                 }
                 if(collision.gameObject.GetComponent<PlayerInventory>().InventorySlots[i].currentItem == collision.gameObject.GetComponent<PlayerInventory>().defaultItem)
                 {
+                    itemType.quantity++; 
                     if (itemType == collision.gameObject.GetComponent<PlayerInventory>().gem) // if the item we're picking up is a gem add to player gems
                     {
                         PlayerInventory.Gems++;
                     }
-                    //collision.gameObject.GetComponent<PlayerInventory>().InventorySlots[i].UpdateSlot(itemType); // the item we're walking into now goes into hopefully the empty slot
+                    collision.gameObject.GetComponent<PlayerInventory>().InventorySlots[i].UpdateSlot(itemType, itemType.quantity); // the item we're walking into now goes into hopefully the empty slot
                     collision.gameObject.GetComponent<PlayerInventory>().InventorySlots[i].hasItem = true;
                     Destroy(gameObject);
                     return;
