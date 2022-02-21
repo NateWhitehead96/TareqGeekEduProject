@@ -9,6 +9,11 @@ public class VendorScript : MonoBehaviour
     public PlayerScript player; // access to the player
     public GameObject VendorCanvas; // to help hide or show the canvas
     public GameObject UpgradeMenu; // the menu that has buttons to upgrade our items
+
+    // Images of our tool icons
+    public Image SwordImage;
+    public Image AxeImage;
+    public Image PickaxeImage;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +72,30 @@ public class VendorScript : MonoBehaviour
         {
             PlayerInventory.Gems--; // at the cost of 1 gem, increase our sword level
             player.swordLevel++;
-            player.AllTools[2].GetComponent<SpriteRenderer>().sprite = player.GemSword; // assigning the sword sprite to the gemsword
+            player.AllTools[2].GetComponent<SpriteRenderer>().sprite = FindObjectOfType<ToolSprites>().GemSword; // assigning the sword sprite to the gemsword
+            SwordImage.sprite = FindObjectOfType<ToolSprites>().GemSword;
+        }
+    }
+
+    public void UpgradeAxe()
+    {
+        if (PlayerInventory.Gems > 0)
+        {
+            PlayerInventory.Gems--; // at the cost of 1 gem, increase our sword level
+            player.axeLevel++;
+            player.AllTools[0].GetComponent<SpriteRenderer>().sprite = FindObjectOfType<ToolSprites>().GemAxe; // assigning the sword sprite to the gemsword
+            AxeImage.sprite = FindObjectOfType<ToolSprites>().GemAxe;
+        }
+    }
+
+    public void UpgradePick()
+    {
+        if (PlayerInventory.Gems > 0)
+        {
+            PlayerInventory.Gems--; // at the cost of 1 gem, increase our sword level
+            player.pickaxeLevel++;
+            player.AllTools[1].GetComponent<SpriteRenderer>().sprite = FindObjectOfType<ToolSprites>().GemPick; // assigning the sword sprite to the gemsword
+            PickaxeImage.sprite = FindObjectOfType<ToolSprites>().GemPick;
         }
     }
 }
