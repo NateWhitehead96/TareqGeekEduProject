@@ -7,7 +7,8 @@ public enum CurrentTool
     NoTool,
     Axe,
     Pickaxe,
-    Sword
+    Sword,
+    Hammer
 }
 
 public class PlayerScript : MonoBehaviour
@@ -45,6 +46,8 @@ public class PlayerScript : MonoBehaviour
     public GameObject PauseCanvas;
 
     public int Health;
+    // Hammer time stuff
+    public GameObject Wall;
     // Start is called before the first frame update
     void Start()
     {
@@ -137,6 +140,12 @@ public class PlayerScript : MonoBehaviour
                     interactableObjects[i].gameObject.GetComponent<EnemyScript>().StunEnemy(); // stun the enemy
                     interactableObjects[i].gameObject.GetComponent<EnemyScript>().Health--;
                 }
+                
+            }
+            if (tool == CurrentTool.Hammer && PlayerInventory.Logs >= 1) // if we have the hammer out
+            {
+                PlayerInventory.Logs--; // subtract the cost
+                Instantiate(Wall, transform.position + transform.up * 5, Quaternion.identity); // build the wall
             }
         }
 
@@ -183,6 +192,10 @@ public class PlayerScript : MonoBehaviour
         {
             EquipSword();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            EquipHammer();
+        }
     }
 
     // Toolbox button functions
@@ -214,5 +227,15 @@ public class PlayerScript : MonoBehaviour
         }
         AllTools[2].SetActive(true);
         tool = CurrentTool.Sword;
+    }
+
+    public void EquipHammer()
+    {
+        for (int i = 0; i < AllTools.Length; i++)
+        {
+            AllTools[i].SetActive(false);
+        }
+        AllTools[3].SetActive(true);
+        tool = CurrentTool.Hammer;
     }
 }
