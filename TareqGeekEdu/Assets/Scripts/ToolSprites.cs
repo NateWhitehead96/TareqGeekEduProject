@@ -7,4 +7,5 @@ public class ToolSprites : MonoBehaviour
     public Sprite GemSword;
     public Sprite GemAxe;
     public Sprite GemPick;
+    public Sprite GemHammer;
 }

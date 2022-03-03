@@ -40,6 +40,7 @@ public class PlayerScript : MonoBehaviour
     public int swordLevel; // upgrade levels for each tool
     public int axeLevel;
     public int pickaxeLevel;
+    public int hammerLevel;
     public GameObject Swordig;
     public Sprite GemSword;
     // PauseControl
@@ -48,6 +49,7 @@ public class PlayerScript : MonoBehaviour
     public int Health;
     // Hammer time stuff
     public GameObject Wall;
+    public bool ownHammer; // if we own the hammer or not
     // Start is called before the first frame update
     void Start()
     {
@@ -192,7 +194,7 @@ public class PlayerScript : MonoBehaviour
         {
             EquipSword();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+        if (Input.GetKeyDown(KeyCode.Alpha5) && ownHammer == true) // if we own hammer we can equip it
         {
             EquipHammer();
         }

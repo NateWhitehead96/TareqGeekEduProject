@@ -14,6 +14,7 @@ public class VendorScript : MonoBehaviour
     public Image SwordImage;
     public Image AxeImage;
     public Image PickaxeImage;
+    public Image HammerImage;
     // Start is called before the first frame update
     void Start()
     {
@@ -96,6 +97,17 @@ public class VendorScript : MonoBehaviour
             player.pickaxeLevel++;
             player.AllTools[1].GetComponent<SpriteRenderer>().sprite = FindObjectOfType<ToolSprites>().GemPick; // assigning the sword sprite to the gemsword
             PickaxeImage.sprite = FindObjectOfType<ToolSprites>().GemPick;
+            print(FindObjectOfType<ToolSprites>().gameObject);
+        }
+    }
+    public void UpgradeHammer()
+    {
+        if (PlayerInventory.Gems > 0)
+        {
+            PlayerInventory.Gems--; // at the cost of 1 gem, increase our sword level
+            player.hammerLevel++;
+            player.AllTools[3].GetComponent<SpriteRenderer>().sprite = FindObjectOfType<ToolSprites>().GemHammer; // assigning the sword sprite to the gemsword
+            HammerImage.sprite = FindObjectOfType<ToolSprites>().GemHammer;
         }
     }
 }
