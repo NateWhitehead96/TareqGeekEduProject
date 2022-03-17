@@ -42,6 +42,7 @@ public class DayNightCycle : MonoBehaviour
                 WorldRocks[i].gameObject.SetActive(true);
                 WorldRocks[i].Health = 3;
             }
+            FindObjectOfType<EnemySpawner>().SpawnEnemy();
         }
     }
 }
