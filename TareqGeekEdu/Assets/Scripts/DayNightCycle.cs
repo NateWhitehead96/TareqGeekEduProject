@@ -13,6 +13,7 @@ public class DayNightCycle : MonoBehaviour
 
     public TreeScript[] WorldTrees; // a list of all the trees in our game
     public RockScript[] WorldRocks; // a list of all the rocks in our game
+    public EnemySpawner[] Spawners; // a list of the spawners
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +43,10 @@ public class DayNightCycle : MonoBehaviour
                 WorldRocks[i].gameObject.SetActive(true);
                 WorldRocks[i].Health = 3;
             }
-            FindObjectOfType<EnemySpawner>().SpawnEnemy();
+            for (int i = 0; i < Spawners.Length; i++) // spawn enemies at midnight
+            {
+                Spawners[i].SpawnEnemy();
+            }
         }
     }
 }

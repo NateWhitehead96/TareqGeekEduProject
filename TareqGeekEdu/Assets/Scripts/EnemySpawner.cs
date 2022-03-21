@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject Enemy;
 
-    public void SpawnEnemy()
+    public void SpawnEnemy() // we'll call this function when we want to spawn the enemies
     {
         Instantiate(Enemy, transform.position, transform.rotation);
     }
