@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// To fix enemy movement, change the MovePosition to be a Vector3
+// to get the enemy to hurt our walls, we'll also want to rewirte a little bit. We'll need to have a colliding circle
+// that will add anything it collides to a list, if the list isn't empty it will move towards the first target and do the deal damage
+// we could also just have the enemy deal damage when they run into the wall, so we change less code
+
 public class EnemyScript : MonoBehaviour
 {
     public Transform Player; // know the players location
-    public Transform MovePosition; // new position to move to
+    public Vector3 MovePosition; // new position to move to
     public float movespeed; // how fast the enemy can move
     public float distance; // distance from player to enemy
 
@@ -25,43 +30,27 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         HealthBar.maxValue = Health;
-        MovePosition = transform;
+        MovePosition = transform.position;
+        Player = FindObjectOfType<PlayerScript>().transform; // assign the player to every enemy that gets spawned
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //DistanceX = Mathf.Abs(transform.position.x - Player.position.x); // this now is the absolute distance
-        //DistanceY = Mathf.Abs(transform.position.y - Player.position.y);
+        
         distance = Vector3.Distance(transform.position, Player.position);
-
-        transform.position = Vector3.Lerp(transform.position, MovePosition.position, Time.deltaTime);
+        if(stunned == false)
+            transform.position = Vector3.Lerp(transform.position, MovePosition, Time.deltaTime);
         if (distance < 20 && stunned == false)
         {
-            MovePosition.position = Player.position; // set the move to position to be the player
-            // we are close enough to the player to chase
-            //if(transform.position.x < Player.position.x) // enemy is to the left of the player
-            //{
-            //    transform.position = new Vector3(transform.position.x + movespeed * Time.deltaTime, transform.position.y);
-            //}
-            //if(transform.position.x > Player.position.x) // enemy is to the right of the player
-            //{
-            //    transform.position = new Vector3(transform.position.x - movespeed * Time.deltaTime, transform.position.y);
-            //}
-            //if(transform.position.y < Player.position.y) // the enemy is below the player
-            //{
-            //    transform.position = new Vector3(transform.position.x, transform.position.y + movespeed * Time.deltaTime);
-            //}
-            //if (transform.position.y > Player.position.y) // the enemy is above the player
-            //{
-            //    transform.position = new Vector3(transform.position.x, transform.position.y - movespeed * Time.deltaTime);
-            //}
+            MovePosition = Player.position; // set the move to position to be the player
+            
         }
         else if (timer > 5)
         {
             float x = Random.Range(transform.position.x - 20, transform.position.x + 20);
             float y = Random.Range(transform.position.y - 20, transform.position.y + 20);
-            MovePosition.position = new Vector3(x, y, 0);
+            MovePosition = new Vector3(x, y, 0);
             timer = 0;
         }
         timer += Time.deltaTime;

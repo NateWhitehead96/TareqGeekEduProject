@@ -23,9 +23,15 @@ public class InventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(player.Health >= 3)
+        {
+            LifeThree.rectTransform.rotation = Quaternion.identity;
+            LifeTwo.rectTransform.rotation = Quaternion.identity;
+        }
         if(player.Health < 3)
         {
             LifeThree.rectTransform.rotation = Quaternion.Euler(0, 0, 180); // when we are lower then 3 health, rotate the 3rd heart upside down
+            LifeTwo.rectTransform.rotation = Quaternion.identity;
         }
         if (player.Health < 2)
         {
