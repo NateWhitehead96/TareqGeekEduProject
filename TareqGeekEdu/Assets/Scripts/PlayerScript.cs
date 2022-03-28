@@ -53,6 +53,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.instance.LoadGame(); // load all of the stuff
         transform.position = new Vector3(0, 0, 0);
         Time.timeScale = 1; // make sure we're not paused
         PauseCanvas.SetActive(false);
@@ -61,7 +62,8 @@ public class PlayerScript : MonoBehaviour
             AllTools[i].SetActive(false); // to make sure our tools are inactive to start
         }
         tool = CurrentTool.NoTool;
-        SwordIcon.SetActive(false); // start the game with the sword icon not active
+        if(ownSword)
+            SwordIcon.SetActive(false); // start the game with the sword icon not active
     }
 
     // Update is called once per frame
@@ -72,6 +74,10 @@ public class PlayerScript : MonoBehaviour
         {
             PauseCanvas.SetActive(true);
             Time.timeScale = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            GameManager.instance.SaveGame(); // save all our data
         }
 
         // ------------ movement animation and input ------------------ //
