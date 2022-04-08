@@ -50,6 +50,7 @@ public class PlayerScript : MonoBehaviour
     // Hammer time stuff
     public GameObject Wall;
     public bool ownHammer; // if we own the hammer or not
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,8 +63,15 @@ public class PlayerScript : MonoBehaviour
             AllTools[i].SetActive(false); // to make sure our tools are inactive to start
         }
         tool = CurrentTool.NoTool;
-        if(ownSword)
+        if (ownSword == false)
             SwordIcon.SetActive(false); // start the game with the sword icon not active
+        else if (ownSword == true)
+            SwordIcon.SetActive(true); // if we own the sword keep the icon active
+
+        if (ownHammer)
+        {
+            FindObjectOfType<HammerPickup>().HammerIcon.SetActive(true);
+        }
     }
 
     // Update is called once per frame
