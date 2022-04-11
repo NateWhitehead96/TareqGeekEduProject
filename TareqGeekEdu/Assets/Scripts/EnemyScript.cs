@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// To fix enemy movement, change the MovePosition to be a Vector3
-// to get the enemy to hurt our walls, we'll also want to rewirte a little bit. We'll need to have a colliding circle
-// that will add anything it collides to a list, if the list isn't empty it will move towards the first target and do the deal damage
-// we could also just have the enemy deal damage when they run into the wall, so we change less code
+
 
 public class EnemyScript : MonoBehaviour
 {
@@ -78,6 +75,7 @@ public class EnemyScript : MonoBehaviour
             if (player[i].gameObject.CompareTag("Player"))
             {
                 player[i].gameObject.GetComponent<PlayerScript>().Health--;
+                SoundManager.instance.PlayerHurt.Play();
             }
         }
         yield return new WaitForSeconds(1);

@@ -142,6 +142,7 @@ public class PlayerScript : MonoBehaviour
                     interactableObjects[i].gameObject.GetComponent<TreeScript>().Health--;
                     PlayerInventory.Logs++; // gainging so logs
                     FindObjectOfType<PlayerInventory>().wood.quantity = PlayerInventory.Logs; // this is very bad
+                    SoundManager.instance.Gathering.Play(); // plays gathering sound
                 }
                 else if (interactableObjects[i].gameObject.CompareTag("Rock") && tool == CurrentTool.Pickaxe)
                 {
@@ -149,12 +150,14 @@ public class PlayerScript : MonoBehaviour
                     interactableObjects[i].gameObject.GetComponent<RockScript>().Health--;
                     PlayerInventory.Stones++; // gaining some stones/rocks
                     FindObjectOfType<PlayerInventory>().rock.quantity = PlayerInventory.Stones; // this is very bad
+                    SoundManager.instance.Gathering.Play(); // plays gathering sound
                 }
                 else if (interactableObjects[i].gameObject.CompareTag("Enemy") && tool == CurrentTool.Sword)
                 {
                     print("Killing enemy");
                     interactableObjects[i].gameObject.GetComponent<EnemyScript>().StunEnemy(); // stun the enemy
                     interactableObjects[i].gameObject.GetComponent<EnemyScript>().Health--;
+                    SoundManager.instance.EnemyHurt.Play(); // plays enemyhurt sound
                 }
                 
             }
