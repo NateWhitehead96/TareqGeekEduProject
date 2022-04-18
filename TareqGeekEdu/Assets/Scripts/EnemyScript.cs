@@ -34,7 +34,6 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
         distance = Vector3.Distance(transform.position, Player.position);
         if(stunned == false)
             transform.position = Vector3.Lerp(transform.position, MovePosition, Time.deltaTime);
