@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class KingBlob : EnemyScript
 {
-    public GameObject Blob;
+    public GameObject Bullet; // the bullet we're shooting
+    public ShootSide side; // side we're shooting
+    public Transform[] shootPositions; // the positions we spawn the bullet at
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,8 @@ public class KingBlob : EnemyScript
             float x = Random.Range(transform.position.x - 20, transform.position.x + 20);
             float y = Random.Range(transform.position.y - 20, transform.position.y + 20);
             MovePosition = new Vector3(x, y, 0);
-            Instantiate(Blob, transform.position, transform.rotation); // spawn a new enemy
+            //spawn bullets
+            SpawnBullets();
             timer = 0;
         }
         timer += Time.deltaTime;
@@ -60,5 +63,25 @@ public class KingBlob : EnemyScript
         }
         yield return new WaitForSeconds(1);
         attacking = false;
+    }
+
+    void SpawnBullets()
+    {
+        // shooting first bullet
+        GameObject newBullet = Instantiate(Bullet, shootPositions[0].position, shootPositions[0].rotation); // spawn bullet 1
+        side = ShootSide.Up; // side we're shooting the bullet from is the right one
+        newBullet.GetComponent<BossBullet>().side = side;
+        // shooting 2nd bullet
+        newBullet = Instantiate(Bullet, shootPositions[1].position, shootPositions[1].rotation); // spawn bullet 2
+        side = ShootSide.Right; // side we're shooting the bullet from is the right one
+        newBullet.GetComponent<BossBullet>().side = side;
+        // shooting 3rd bullet
+        newBullet = Instantiate(Bullet, shootPositions[2].position, shootPositions[2].rotation); // spawn bullet 3
+        side = ShootSide.Down; // side we're shooting the bullet from is the down one
+        newBullet.GetComponent<BossBullet>().side = side;
+        // shooting 2nd bullet
+        newBullet = Instantiate(Bullet, shootPositions[3].position, shootPositions[3].rotation); // spawn bullet 4
+        side = ShootSide.Left; // side we're shooting the bullet from is the left one
+        newBullet.GetComponent<BossBullet>().side = side;
     }
 }
