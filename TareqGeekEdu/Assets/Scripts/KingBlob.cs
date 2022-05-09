@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // so we go between scenes
 
 public class KingBlob : EnemyScript
 {
     public GameObject Bullet; // the bullet we're shooting
     public ShootSide side; // side we're shooting
     public Transform[] shootPositions; // the positions we spawn the bullet at
+
+    public GameObject WinCanvas; // holds the you win
     // Start is called before the first frame update
     void Start()
     {
+        WinCanvas.SetActive(false); // hide on gamestart
         HealthBar.maxValue = Health;
+        
     }
 
     // Update is called once per frame
@@ -35,19 +40,34 @@ public class KingBlob : EnemyScript
         }
         timer += Time.deltaTime;
 
-        if (distance < 3f && attacking == false) // within the attack range
-        {
-            StartCoroutine(AttackPlayer());
-        }
+        //if (distance < 3f && attacking == false) // within the attack range
+        //{
+        //    StartCoroutine(AttackPlayer());
+        //}
 
         HealthBar.value = Health;
 
         if (Health <= 0)
         {
             Instantiate(Gem, transform.position, transform.rotation); // spawn gem
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            WinCanvas.SetActive(true); // show canvas
+            Time.timeScale = 0; // pause
         }
     }
+
+    public void ContinueSurviving()
+    {
+        Time.timeScale = 1; // reset time
+        Destroy(gameObject); // kill king blob
+    }
+
+    public void LiveWithTrees()
+    {
+        // for now open main menu
+        SceneManager.LoadScene(0);
+    }
+
     IEnumerator AttackPlayer()
     {
         attacking = true;
@@ -63,6 +83,15 @@ public class KingBlob : EnemyScript
         }
         yield return new WaitForSeconds(1);
         attacking = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) // this will make blob bob hurt us only when he touches us
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerScript>().Health--;
+            SoundManager.instance.PlayerHurt.Play();
+        }
     }
 
     void SpawnBullets()

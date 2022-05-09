@@ -14,6 +14,9 @@ public class DayNightCycle : MonoBehaviour
     public TreeScript[] WorldTrees; // a list of all the trees in our game
     public RockScript[] WorldRocks; // a list of all the rocks in our game
     public EnemySpawner[] Spawners; // a list of the spawners
+
+    public GameObject KingBlob; // the prefab of bob
+    public int nightsSurvived; // how many nights we survived
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,7 @@ public class DayNightCycle : MonoBehaviour
         if(GlobalLight.intensity < 0) // we're at our lowest intensity for the day,  PEAK NIGHT TIME MIDNIGHT
         {
             Direction = 1;
+            nightsSurvived++; // increase the amount of nights we lived
             for (int i = 0; i < WorldTrees.Length; i++)
             {
                 WorldTrees[i].gameObject.SetActive(true);
@@ -46,6 +50,12 @@ public class DayNightCycle : MonoBehaviour
             for (int i = 0; i < Spawners.Length; i++) // spawn enemies at midnight
             {
                 Spawners[i].SpawnEnemy();
+            }
+
+            if(nightsSurvived >= 2) // if we survive 2 nights spawn king
+            {
+                int randSpawn = Random.Range(0, Spawners.Length);
+                Instantiate(KingBlob, Spawners[randSpawn].transform.position, Spawners[randSpawn].transform.rotation);
             }
         }
     }
