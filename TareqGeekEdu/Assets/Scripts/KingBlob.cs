@@ -15,7 +15,7 @@ public class KingBlob : EnemyScript
     {
         WinCanvas.SetActive(false); // hide on gamestart
         HealthBar.maxValue = Health;
-        
+        Player = FindObjectOfType<PlayerScript>().transform; // makes king blob know about player when it spawns
     }
 
     // Update is called once per frame

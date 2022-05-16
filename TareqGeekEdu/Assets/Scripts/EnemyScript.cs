@@ -89,7 +89,7 @@ public class EnemyScript : MonoBehaviour
 
     IEnumerator StunTime()
     {
-        yield return new WaitForSeconds(0.5f); // wait 0.5 seconds
+        yield return new WaitForSeconds(1f); // wait 1 seconds
         stunned = false;
     }
 }
