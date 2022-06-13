@@ -24,5 +24,9 @@ public class Enemy : MonoBehaviour
         {
             currentPoint++; // make us go to the next point in the array
         }
+        if(currentPoint >= maze.Points.Length) // if the enemy has reached the end of the checkpoints
+        {
+            Destroy(gameObject);
+        }
     }
 }

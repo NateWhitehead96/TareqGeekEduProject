@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4833274688356419212}
   - component: {fileID: 4833274688356419211}
   - component: {fileID: 4833274688356419213}
+  - component: {fileID: 7388568028649642082}
+  - component: {fileID: 5498362195037364196}
   m_Layer: 0
   m_Name: ArrowTower
   m_TagString: Untagged
@@ -97,3 +99,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 0
   tile: {fileID: 0}
+--- !u!114 &7388568028649642082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4833274688356419210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 707a50165f62f864e975b310559519c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 0}
+  enemiesInRange: []
+  reloadTime: 0
+  timer: 0
+--- !u!58 &5498362195037364196
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4833274688356419210}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2
