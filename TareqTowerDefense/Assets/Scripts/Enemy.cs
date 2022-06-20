@@ -28,5 +28,10 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if(health <= 0) // if the enemy dies
+        {
+            FindObjectOfType<TowerManager>().gold += 5; // award money
+            Destroy(gameObject); // kill enemy
+        }
     }
 }
