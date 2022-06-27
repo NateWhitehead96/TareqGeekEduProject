@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maze: {fileID: 0}
   moveSpeed: 1
-  health: 3
+  health: 2
   currentPoint: 0
 --- !u!61 &5655225782547564268
 BoxCollider2D:
